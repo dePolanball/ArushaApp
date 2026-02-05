@@ -9,20 +9,29 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
-    <script>
+   <script>
   document.addEventListener("click", function (e) {
     const a = e.target.closest("a[href]");
     if (!a) return;
 
     const href = a.getAttribute("href");
 
-    // Only intercept internal absolute paths like "/admin"
+    // Ignore external links, mailto, tel, etc.
+    if (
+      href.startsWith("http") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("tel:")
+    ) {
+      return;
+    }
+
+    // Intercept internal absolute paths like "/admin"
     if (href.startsWith("/") && !href.startsWith("/#")) {
       e.preventDefault();
       const base = "/ArushaApp/#";
       window.location.href = base + href;
     }
   });
-    </script>
-  </body>
+   </script>
+ </body>
 </html>
