@@ -7,7 +7,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from fastapi import FastAPI
-from sheets import fetch_sheet_rows
 from analytics import get_cached
 
 # -----------------------------
