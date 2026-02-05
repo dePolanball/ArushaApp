@@ -8,6 +8,27 @@ const ADMIN_KEY = "arusha_admins";
 // 🔒 CHANGE THIS TO YOUR EMAIL (SUPERADMIN)
 const SUPERADMIN_EMAIL = "riturab@gmail.com";
 
+/* =====================================================
+   ADMIN SEED — NO LOGIC CHANGE
+   Adds admins to existing admin list if missing
+   ===================================================== */
+
+const SEEDED_ADMINS = [
+  "ritnrup@gmail.com",
+  "bhabashankar@gmail.com",
+  "petersing.17@gmail.com",
+];
+
+(function seedAdminsOnce() {
+  const existing = JSON.parse(localStorage.getItem(ADMIN_KEY) || "[]");
+  const merged = Array.from(new Set([...existing, ...SEEDED_ADMINS]));
+  localStorage.setItem(ADMIN_KEY, JSON.stringify(merged));
+})();
+
+/* =====================================================
+   AUTH LOGIC — UNCHANGED
+   ===================================================== */
+
 export function saveAuth(token) {
   const decoded = jwtDecode(token);
   const email = decoded.email;
